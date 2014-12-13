@@ -7,14 +7,16 @@ labelHTML = (obj, objType) ->
 window.sourceSearch.component = flight.component ->
 	@attributes({
 		removeLabelSelector: '.remove-label',
-		dropDownItemSelector: '.item'
+		dropDownItemSelector: '.item',
+		difficultySelector: '#difficulty'
 	})
 
 	@after 'initialize', ->
 		$('.ui.selection.dropdown').dropdown()
 		@on 'click', {
 			removeLabelSelector: ((e, data) -> @removeLabel(e, data)),
-			dropDownItemSelector: (-> @trigger 'sources:filter')
+			dropDownItemSelector: (-> @trigger 'sources:filter'),
+			difficultySelector: (-> @trigger 'sources:filter')
 		}
 		@on document, 'typeahead:autocompleted', @addLabel
 		@on '#keywords', 'keydown blur', (e) ->
@@ -47,7 +49,8 @@ window.sourceSearch.component = flight.component ->
 		filters = { filters: {
 			keywords: @getKeywords(),
 			emotions: @getTagIds('emotions'),
-			categories: @getTagIds('categories')
+			categories: @getTagIds('categories'),
+			difficulty: @getDifficulty()
 		}}
 		if @getPrice() >= 0
 			filters.filters.price = @getPrice()
@@ -56,6 +59,7 @@ window.sourceSearch.component = flight.component ->
 
 	@getKeywords = -> $('#keywords').val().split " "
 	@getPrice = -> parseInt $('#price').dropdown('get value')
+	@getDifficulty = -> parseInt $('#difficulty').val()
 	@getTagIds = (tagType) ->
 		$.map($("##{tagType}-label-container input"), (input) ->
 			parseInt $(input).val()

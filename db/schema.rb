@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141117171517) do
+ActiveRecord::Schema.define(version: 20141213230421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,15 +36,6 @@ ActiveRecord::Schema.define(version: 20141117171517) do
   add_index "comments", ["source_id"], name: "index_comments_on_source_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
-  create_table "emotions", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "label_colour"
-  end
-
-  add_index "emotions", ["name"], name: "index_emotions_on_name", using: :btree
-
   create_table "source_categories", force: true do |t|
     t.integer  "source_id"
     t.integer  "category_id"
@@ -55,43 +46,24 @@ ActiveRecord::Schema.define(version: 20141117171517) do
   add_index "source_categories", ["category_id"], name: "index_source_categories_on_category_id", using: :btree
   add_index "source_categories", ["source_id"], name: "index_source_categories_on_source_id", using: :btree
 
-  create_table "source_emotions", force: true do |t|
-    t.integer  "source_id"
-    t.integer  "emotion_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "source_emotions", ["emotion_id"], name: "index_source_emotions_on_emotion_id", using: :btree
-  add_index "source_emotions", ["source_id"], name: "index_source_emotions_on_source_id", using: :btree
-
   create_table "sources", force: true do |t|
     t.integer  "user_id"
     t.string   "title"
+    t.string   "url"
     t.text     "description"
     t.integer  "price"
-    t.boolean  "location_dependent"
+    t.string   "time_required"
+    t.integer  "difficulty"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.string   "time_required"
-    t.text     "materials"
+    t.integer  "kind"
   end
 
   add_index "sources", ["user_id"], name: "index_sources_on_user_id", using: :btree
-
-  create_table "steps", force: true do |t|
-    t.string   "description"
-    t.integer  "source_id"
-    t.integer  "ordinal"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "steps", ["source_id"], name: "index_steps_on_source_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email"

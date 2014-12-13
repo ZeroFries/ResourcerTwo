@@ -1,4 +1,4 @@
-class CreatesourceCategories < ActiveRecord::Migration
+class CreateSourceCategories < ActiveRecord::Migration
   def change
     create_table :source_categories do |t|
       t.references :source, index: true

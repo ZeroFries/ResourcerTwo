@@ -2,6 +2,8 @@
 
 class Source < ActiveRecord::Base
   belongs_to :user
+
+  KINDS = ['Article', 'Book', 'Video', 'Course']
   
   has_attached_file :avatar, :styles => { :medium => "260x130>", :thumb => "100x100>" }, :default_url => 'fractal.gif'
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
@@ -21,7 +23,7 @@ class Source < ActiveRecord::Base
   end
 
   def category_names
-    if self.emotions.class == Category::ActiveRecord_Associations_CollectionProxy
+    if self.categories.class == Category::ActiveRecord_Associations_CollectionProxy
       self.categories.pluck :name
     else
       self.categories.map &:name

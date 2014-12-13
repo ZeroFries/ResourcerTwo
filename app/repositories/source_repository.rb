@@ -5,6 +5,7 @@ class SourceRepository < BaseRepository
 
 		query = query.where{user_id == search_terms[:user_id]} if search_terms[:user_id]
 		query = query.where{price <= search_terms[:price]} unless search_terms[:price].blank?
+		query = query.where{difficulty <= search_terms[:difficulty]} unless search_terms[:difficulty].blank?
 		
 		search_terms[:keywords].each do |keyword|
 			start_of_word_term = "% #{keyword}%"

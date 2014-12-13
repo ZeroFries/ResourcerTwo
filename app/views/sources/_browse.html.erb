@@ -1,0 +1,56 @@
+<div id="browse" class="ui floated left">
+	<h4 class="browse-header">Filters</h3>
+
+	<div class="ui form" style="padding: 1em;">
+
+		<div class="ui field">
+			<label><i class="search icon"></i>  Keywords</label>	
+			<div class="ui mini icon input">
+				<input id="keywords" type="text" placeholder="E.g javascript clojures"
+				value="<%= params[:filters]['keywords'].join(' ') if params[:filters] && params[:filters]['keywords'] %>"></input>
+				<i class="search icon"></i>
+			</div>
+		</div>
+
+		<div class="ui field">
+			<label><i class="tag icon"></i> Topics</label>
+			<div id="categories-label-container">
+				<%= render 'browse_labels', models: @categories if @categories %>
+			</div>	
+			<div class="ui mini icon input">
+				<input type="text" id="categories" class="typeahead" placeholder="E.g mobile"></input>
+				<i class="search icon"></i>
+			</div>
+		</div>
+
+		<div class="ui field">
+			<label><i class="dashboard icon"></i> Difficulty</label>
+			<input type="range" id="difficulty"></input>
+		</div>
+
+
+	    <div class="ui field">
+			<label><i class="dollar icon"></i> Price</label>	
+
+			<div class="ui selection dropdown" id="price">
+	        	<div class="default text"><%= params[:filters]['price'].to_i if params[:filters] %></div>
+	        	<i class="dropdown icon"></i>
+	        	<div style="" tabindex="-1" class="menu transition hidden">
+	    	  		<div class="item" data-value="">-</div>
+	          		<div class="item" data-value="0">Free</div>
+					<div class="item" data-value="1">Cheap</div>
+					<div class="item" data-value="2">Affordable</div>
+					<div class="item" data-value="3">Expensive</div>
+	        	</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	window.sourceSearch.component.attachTo('#browse');
+
+	window.typeAhead.component.attachTo('#categories.typeahead');
+
+	window.categoriesService.getCategories();
+</script>

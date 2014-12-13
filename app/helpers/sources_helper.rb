@@ -7,6 +7,15 @@ module SourcesHelper
 		end.reverse
 	end
 
+	def kind_to_icon(kind)
+		{
+			'Article' => 'file text outline',
+			'Book' => 'book', 
+			'Video' => 'film',
+			'Course' => 'student'
+		}[Source::KINDS[kind.to_i]]
+	end
+
 	def price_to_description(price)
 		['Free', 'Cheap', 'Affordable', 'Expensive'][price.to_i]
 	end

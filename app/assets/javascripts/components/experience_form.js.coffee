@@ -16,9 +16,7 @@ labelHTML = (obj, objTypeSingle, objTypePlural) ->
 
 window.sourceForm.component = flight.component ->
 	@attributes({
-		addStepSelector: '#add-step',
-		removeLabelSelector: '.remove-label',
-		removeStepSelector: '.remove-step'
+		removeLabelSelector: '.remove-label'
 	})
 
 	@after 'initialize', ->
@@ -33,27 +31,10 @@ window.sourceForm.component = flight.component ->
 	@formEvents = ->
 		@on 'keypress', (e) ->
 			e.preventDefault() if e.keyCode == 13
-		@on document, 'removeStep', @removeStep
 		@on 'click', {
-			addStepSelector: @addStep,
-			removeStepSelector: @removeStep,
 			removeLabelSelector: @removeLabel
 		}
-		that = this
-		$('#add-step').on 'keypress', (e) ->
-			that.addStep() if e.keyCode == 13
 		@on document, 'typeahead:autocompleted', @addLabel
-			
-	@addStep = () ->
-		step = $(stepInputHTML())
-		$('#step-container').append step
-
-	@removeStep = (e, data) ->
-		$step = $(e.target).parents('.source-step')[0]
-		$step.remove()
-		for step, i in $('.source-step')
-			$(step).find('.description').attr('placeholder', "Step #{i+1}")
-			$(step).find('.ordinal').attr('value', i)
 
 	@addLabel = (e, data, dataName) ->
 		dataName = data.dataName if dataName == undefined
@@ -115,7 +96,20 @@ window.sourceForm.validate = (form) ->
 	    rules: [
 	      {
 	        type: 'empty',
-	        prompt: 'Give your source a title'
+	        prompt: 'Title required'
+	      }
+	    ]
+	  },
+	  url: {
+	    identifier: 'source_url',
+	    rules: [
+	      {
+	        type: 'empty',
+	        prompt: 'URL required'
+	      },
+	      {
+	        type: 'url',
+	        prompt: 'Invalid URL'
 	      }
 	    ]
 	  },
@@ -124,7 +118,7 @@ window.sourceForm.validate = (form) ->
 	    rules: [
 	      {
 	        type: 'empty',
-	        prompt: 'Give your source a description'
+	        prompt: 'Description required'
 	      }
 	    ]
 	  },
@@ -133,20 +127,11 @@ window.sourceForm.validate = (form) ->
 	    rules: [
 	      {
 	        type: 'empty',
-	        prompt: 'Upload an image which reminds you of your source'
+	        prompt: 'Upload an image'
 	      },
 	      {
 	        type: 'isImage',
 	        prompt: 'File must be a valid image (jpg, png, gif, or bmp)'
-	      }
-	    ]
-	  },
-	  step: {
-	    identifier: 'step',
-	    rules: [
-	      {
-	        type: 'empty',
-	        prompt: 'A step was left blank'
 	      }
 	    ]
 	  }

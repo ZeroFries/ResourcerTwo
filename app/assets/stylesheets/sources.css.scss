@@ -33,6 +33,13 @@
 		color: rgba(54, 51, 74, 0.96);	
 	}
 
+	.rating-container {
+		background:transparent;
+		font-weight: 700;
+		border-radius:0; 
+		z-index:999;
+	}
+
 	.thumbnail {
 		display: inline-block;
 		width: 100%;
@@ -52,11 +59,6 @@
 		left: -0.4em;
 		letter-spacing: 0.1em;
 		line-height: 2em;
-	}
-
-	.rating {
-		font-family: Karma;
-		font-size: 0.6 !important;
 	}
 
 	.tags-container {
@@ -192,6 +194,11 @@
 		max-height: 1em;
 		width: 84%;
 		.icon { float: right; }
+	} 
+
+	#difficulty {
+		margin-left: -0.2em;
+		width: 95%;
 	}
 
 }

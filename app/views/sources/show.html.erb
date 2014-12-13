@@ -7,11 +7,6 @@
 
 		<div class="meta-container">
 			<div class="tags-container">
-				<div class="label-group mood ui small labels">
-					<% @source.emotions.each do |emotion| %>
-						<%= render "emotions/label", emotion: emotion %>
-					<% end %>
-				</div>
 				<div class="label-group tags ui tiny labels">
 					<% @source.categories.each do |category| %>
 						<%= render "categories/label", category: category %>
@@ -32,30 +27,6 @@
 		</div>
 
 		<div class="description"><%= @source.description %></div>
-
-		<div class="materials">
-			<h4 class="source-sub-header">Materials Needed</h4>
-			<ul>
-				<% @source.materials.split(/\,\s*/).each do |material| %>
-					<li><%= material %></li>
-				<% end %>
-			</ul>
-		</div>
-
-		<div class="steps">
-			<h4 class="source-sub-header">Steps</h4>
-			<ul>
-				<% @source.steps.each do |step| %>
-					<li><%= step.description %></li>
-				<% end %>
-			</ul>
-		</div>
-
-		<% if @source.location_dependent %>
-			<div class="location">
-				<h4 class="source-sub-header">Location</h4>
-			</div>
-		<% end %>
 
 		<div class="ui comments">
   			<h3 class="ui dividing header">Comments</h3>
