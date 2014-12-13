@@ -1,11 +1,11 @@
 # Define namespaces
-window.experienceForm ||= {}
-window.experienceList ||= {}
-window.experienceSearch ||= {}
+window.sourceForm ||= {}
+window.sourceList ||= {}
+window.sourceSearch ||= {}
 window.typeAhead ||= {}
 
 # Misc Functions
 window.updateURL = (path) ->
-	window.history.pushState({"html":$('body').html(),"pageTitle": 'Experience'},"", path)
+	window.history.pushState({"html":$('body').html(),"pageTitle": 'source'},"", path)
 
 $ ->

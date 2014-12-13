@@ -1,29 +1,29 @@
-<article class="experience-container">
-	<%= image_tag(@experience.avatar.url, class: "headpiece") %>
+<article class="source-container">
+	<%= image_tag(@source.avatar.url, class: "headpiece") %>
 
 	<div class="content-container">
 
-		<h3 class="title ui header"><%= @experience.title %></h3>
+		<h3 class="title ui header"><%= @source.title %></h3>
 
 		<div class="meta-container">
 			<div class="tags-container">
 				<div class="label-group mood ui small labels">
-					<% @experience.emotions.each do |emotion| %>
+					<% @source.emotions.each do |emotion| %>
 						<%= render "emotions/label", emotion: emotion %>
 					<% end %>
 				</div>
 				<div class="label-group tags ui tiny labels">
-					<% @experience.categories.each do |category| %>
+					<% @source.categories.each do |category| %>
 						<%= render "categories/label", category: category %>
 					<% end %>
 				</div>
 
-				<% if @experience.user %>
+				<% if @source.user %>
 					<div class="user-tag"> 
-						<%= link_to @experience.user.username, users_path(@experience.user) %> - 
-						<%= time_ago @experience.created_at %>
+						<%= link_to @source.user.username, users_path(@source.user) %> -
+						<%= time_ago @source.created_at %>
 						<span class="price">
-							<%= price_to_description @experience.price %>
+							<%= price_to_description @source.price %>
 						</span>
 					</div>
 				<% end %>
@@ -31,35 +31,35 @@
 			</div>
 		</div>
 
-		<div class="description"><%= @experience.description %></div>
+		<div class="description"><%= @source.description %></div>
 
 		<div class="materials">
-			<h4 class="experience-sub-header">Materials Needed</h4>
+			<h4 class="source-sub-header">Materials Needed</h4>
 			<ul>
-				<% @experience.materials.split(/\,\s*/).each do |material| %>
+				<% @source.materials.split(/\,\s*/).each do |material| %>
 					<li><%= material %></li>
 				<% end %>
 			</ul>
 		</div>
 
 		<div class="steps">
-			<h4 class="experience-sub-header">Steps</h4>
+			<h4 class="source-sub-header">Steps</h4>
 			<ul>
-				<% @experience.steps.each do |step| %>
+				<% @source.steps.each do |step| %>
 					<li><%= step.description %></li>
 				<% end %>
 			</ul>
 		</div>
 
-		<% if @experience.location_dependent %>
+		<% if @source.location_dependent %>
 			<div class="location">
-				<h4 class="experience-sub-header">Location</h4>
+				<h4 class="source-sub-header">Location</h4>
 			</div>
 		<% end %>
 
 		<div class="ui comments">
   			<h3 class="ui dividing header">Comments</h3>
-  			<% @experience.comments.each do |comment| %>
+  			<% @source.comments.each do |comment| %>
   				<div class="comment">
 				    <div class="content">
 				      <a class="author"><%= comment.user.username %></a>

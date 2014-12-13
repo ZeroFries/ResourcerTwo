@@ -1,36 +1,36 @@
 <div class="column">
-	<%= link_to experience do %>
-		<article class="experience-card ui segment" style="position: relative;">
+	<%= link_to source do %>
+		<article class="source-card ui segment" style="position: relative;">
 			<div class="image-meta-container">
 				<div class="ui top left attached label purple" title="Rating" style="border-radius:0; z-index:999;">
-					<i class="heart icon"></i>978<%#= experience.rating %>
+					<i class="heart icon"></i>978<%#= source.rating %>
 				</div>
-				<%= image_tag(experience.avatar.url, class: "thumbnail") %>
+				<%= image_tag(source.avatar.url, class: "thumbnail") %>
 			</div>
 
 			<div class="content-container">
 				
-				<h3 class="title ui header"><%= experience.title %></h3>
-				<h4 class="description"><%= truncate experience.description, length: 83 %></h4>
+				<h3 class="title ui header"><%= source.title %></h3>
+				<h4 class="description"><%= truncate source.description, length: 83 %></h4>
 
 				<div class="tags-container">
 					<div class="label-group mood ui small labels">
-						<% experience.emotions.each do |emotion| %>
+						<% source.emotions.each do |emotion| %>
 							<%= render "emotions/label", emotion: emotion %>
 						<% end %>
 					</div>
 					<div class="label-group tags ui tiny labels">
-						<% experience.categories.each do |category| %>
+						<% source.categories.each do |category| %>
 							<%= render "categories/label", category: category %>
 						<% end %>
 					</div>
 
-					<% if experience.user %>
+					<% if source.user %>
 						<div class="user-tag"> 
-							<%= link_to experience.user.username, users_path(experience.user) %> - 
-							<%= time_ago experience.created_at %>
+							<%= link_to source.user.username, users_path(source.user) %> -
+							<%= time_ago source.created_at %>
 							<span class="price">
-								<%= price_to_description experience.price %>
+								<%= price_to_description source.price %>
 							</span>
 						</div>
 					<% end %>

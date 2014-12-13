@@ -1,2 +1,2 @@
-class ExperienceCategoriesController < ApplicationController
+class SourceCategoriesController < ApplicationController
 end

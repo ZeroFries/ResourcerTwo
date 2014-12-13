@@ -1,6 +1,6 @@
-# attributes: text, user_id, experience_id
+# attributes: text, user_id, source_id
 
 class Comment < ActiveRecord::Base
   belongs_to :user
-  belongs_to :experience
+  belongs_to :source
 end

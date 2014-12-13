@@ -27,13 +27,13 @@ ActiveRecord::Schema.define(version: 20141117171517) do
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"
-    t.integer  "experience_id"
+    t.integer  "source_id"
     t.string   "text"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "comments", ["experience_id"], name: "index_comments_on_experience_id", using: :btree
+  add_index "comments", ["source_id"], name: "index_comments_on_source_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "emotions", force: true do |t|
@@ -45,27 +45,27 @@ ActiveRecord::Schema.define(version: 20141117171517) do
 
   add_index "emotions", ["name"], name: "index_emotions_on_name", using: :btree
 
-  create_table "experience_categories", force: true do |t|
-    t.integer  "experience_id"
+  create_table "source_categories", force: true do |t|
+    t.integer  "source_id"
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "experience_categories", ["category_id"], name: "index_experience_categories_on_category_id", using: :btree
-  add_index "experience_categories", ["experience_id"], name: "index_experience_categories_on_experience_id", using: :btree
+  add_index "source_categories", ["category_id"], name: "index_source_categories_on_category_id", using: :btree
+  add_index "source_categories", ["source_id"], name: "index_source_categories_on_source_id", using: :btree
 
-  create_table "experience_emotions", force: true do |t|
-    t.integer  "experience_id"
+  create_table "source_emotions", force: true do |t|
+    t.integer  "source_id"
     t.integer  "emotion_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "experience_emotions", ["emotion_id"], name: "index_experience_emotions_on_emotion_id", using: :btree
-  add_index "experience_emotions", ["experience_id"], name: "index_experience_emotions_on_experience_id", using: :btree
+  add_index "source_emotions", ["emotion_id"], name: "index_source_emotions_on_emotion_id", using: :btree
+  add_index "source_emotions", ["source_id"], name: "index_source_emotions_on_source_id", using: :btree
 
-  create_table "experiences", force: true do |t|
+  create_table "sources", force: true do |t|
     t.integer  "user_id"
     t.string   "title"
     t.text     "description"
@@ -81,17 +81,17 @@ ActiveRecord::Schema.define(version: 20141117171517) do
     t.text     "materials"
   end
 
-  add_index "experiences", ["user_id"], name: "index_experiences_on_user_id", using: :btree
+  add_index "sources", ["user_id"], name: "index_sources_on_user_id", using: :btree
 
   create_table "steps", force: true do |t|
     t.string   "description"
-    t.integer  "experience_id"
+    t.integer  "source_id"
     t.integer  "ordinal"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "steps", ["experience_id"], name: "index_steps_on_experience_id", using: :btree
+  add_index "steps", ["source_id"], name: "index_steps_on_source_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email"
@@ -110,12 +110,12 @@ ActiveRecord::Schema.define(version: 20141117171517) do
   create_table "votes", force: true do |t|
     t.boolean  "up"
     t.integer  "user_id"
-    t.integer  "experience_id"
+    t.integer  "source_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "votes", ["experience_id"], name: "index_votes_on_experience_id", using: :btree
+  add_index "votes", ["source_id"], name: "index_votes_on_source_id", using: :btree
   add_index "votes", ["user_id"], name: "index_votes_on_user_id", using: :btree
 
 end

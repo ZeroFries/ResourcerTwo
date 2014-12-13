@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :experience_emotions
+  resources :source_emotions
 
-  resources :experience_categories
+  resources :source_categories
 
   resources :categories
 
@@ -9,11 +9,11 @@ Rails.application.routes.draw do
 
   resources :comments
 
-  resources :experiences
+  resources :sources
 
   resources :emotions
 
   resources :users
 
-  root to: 'experiences#index'
+  root to: 'sources#index'
 end

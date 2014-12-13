@@ -1,13 +1,13 @@
 <%= render 'browse' %>
 
-<div class="experience-card-container" id="experience-container">
+<div class="source-card-container" id="source-container">
   <div class="ui three column grid">
-		<% @experiences.each_with_index do |experience, i| %>
-			<%= render 'experience_card', experience: experience %>
+		<% @sources.each_with_index do |source, i| %>
+			<%= render 'source_card', source: source %>
 		<% end %>
 	</div>
 </div>
 
 <script>
-	window.experienceList.component.attachTo('#experience-container');
+	window.sourceList.component.attachTo('#source-container');
 </script>

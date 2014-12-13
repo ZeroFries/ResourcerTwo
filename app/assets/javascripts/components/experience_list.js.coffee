@@ -1,6 +1,6 @@
-window.experienceList.component = flight.component ->
+window.sourceList.component = flight.component ->
 	@after 'initialize', ->
-		@on document, 'experiences:indexHTML', @setHTML
+		@on document, 'sources:indexHTML', @setHTML
 
 	@setHTML = (e, html) ->
 		html = html.html

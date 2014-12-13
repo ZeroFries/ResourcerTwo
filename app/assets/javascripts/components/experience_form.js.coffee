@@ -1,20 +1,20 @@
 stepInputHTML = () ->
-	stepCount = $('.experience-step').length
+	stepCount = $('.source-step').length
 
-	"<div class=\"experience-step\">" +
-	"<input type=\"hidden\" name=\"experience[steps_attributes][][ordinal]\" value=\"#{stepCount}\" class=\"ordinal\"></input>" + 
+	"<div class=\"source-step\">" +
+	"<input type=\"hidden\" name=\"source[steps_attributes][][ordinal]\" value=\"#{stepCount}\" class=\"ordinal\"></input>" +
 	"<div class=\"ui labeled input\">" +
-	"<input data-validate=\"step\" placeholder=\"Step #{stepCount+1}\" type=\"text\" name=\"experience[steps_attributes][][description]\" class=\"description\">" +
+	"<input data-validate=\"step\" placeholder=\"Step #{stepCount+1}\" type=\"text\" name=\"source[steps_attributes][][description]\" class=\"description\">" +
 	"<div class=\"ui corner red large label remove-step\" title=\"Remove Step\"><i class=\"remove icon\">" +
 	"</i></div></input></div></div>"
 
 labelHTML = (obj, objTypeSingle, objTypePlural) ->
 	"<span class=\"category ui label #{obj.label_colour}\">#{obj.name}" +
 	"<i class=\"remove-label remove icon\"></i>" +
-	"<input type=\"hidden\" name=\"experience[experience_#{objTypePlural}_attributes][][#{objTypeSingle}_id]\" value=\"#{obj.id}\" class=\"#{objTypeSingle}_id\">" + 
+	"<input type=\"hidden\" name=\"source[source_#{objTypePlural}_attributes][][#{objTypeSingle}_id]\" value=\"#{obj.id}\" class=\"#{objTypeSingle}_id\">" +
 	"</input></span>"
 
-window.experienceForm.component = flight.component ->
+window.sourceForm.component = flight.component ->
 	@attributes({
 		addStepSelector: '#add-step',
 		removeLabelSelector: '.remove-label',
@@ -26,7 +26,7 @@ window.experienceForm.component = flight.component ->
 		@formEvents()
 
 	@initializeUI = () ->
-		$('#experience_price').dropdown()
+		$('#source_price').dropdown()
 		$('.ui.checkbox').checkbox()
 		$('.ui.accordion').accordion()
 
@@ -49,9 +49,9 @@ window.experienceForm.component = flight.component ->
 		$('#step-container').append step
 
 	@removeStep = (e, data) ->
-		$step = $(e.target).parents('.experience-step')[0]
+		$step = $(e.target).parents('.source-step')[0]
 		$step.remove()
-		for step, i in $('.experience-step')
+		for step, i in $('.source-step')
 			$(step).find('.description').attr('placeholder', "Step #{i+1}")
 			$(step).find('.ordinal').attr('value', i)
 
@@ -75,7 +75,7 @@ window.experienceForm.component = flight.component ->
 
 # ********* Form Validation *********
 
-window.experienceForm.validate = (form) ->
+window.sourceForm.validate = (form) ->
 	$.fn.form.settings.keyboardShortcuts = false
 	$.fn.form.settings.rules.timeExpression = (s) ->
 		# eg: 14-15 minutes; 10.5-12.5s; 8 days 
@@ -102,7 +102,7 @@ window.experienceForm.validate = (form) ->
 
 	$(form).form({
 	  time: {
-	  	identifier: 'experience_time_required'
+	  	identifier: 'source_time_required'
 		  rules: [
 		  	{
 		  		type: 'timeExpression',
@@ -111,29 +111,29 @@ window.experienceForm.validate = (form) ->
 		  ]
 		},
 	  title: {
-	    identifier: 'experience_title',
+	    identifier: 'source_title',
 	    rules: [
 	      {
 	        type: 'empty',
-	        prompt: 'Give your experience a title'
+	        prompt: 'Give your source a title'
 	      }
 	    ]
 	  },
 	  description: {
-	    identifier: 'experience_description',
+	    identifier: 'source_description',
 	    rules: [
 	      {
 	        type: 'empty',
-	        prompt: 'Give your experience a description'
+	        prompt: 'Give your source a description'
 	      }
 	    ]
 	  },
 	  avatar: {
-	    identifier: 'experience_avatar',
+	    identifier: 'source_avatar',
 	    rules: [
 	      {
 	        type: 'empty',
-	        prompt: 'Upload an image which reminds you of your experience'
+	        prompt: 'Upload an image which reminds you of your source'
 	      },
 	      {
 	        type: 'isImage',

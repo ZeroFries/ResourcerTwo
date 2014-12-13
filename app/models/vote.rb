@@ -1,8 +1,8 @@
-# attributes: up, user_id, experience_id
+# attributes: up, user_id, source_id
 
 class Vote < ActiveRecord::Base
   belongs_to :user
-  belongs_to :experience
+  belongs_to :source
 
   def value
   	up ? 1 : -1

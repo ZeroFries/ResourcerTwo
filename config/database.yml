@@ -16,12 +16,12 @@ default: &default
 
 development:
   <<: *default
-  database: experience_app_dev
+  database: resourcer_dev
 
 test:
   <<: *default
-  database: experience_app_test
+  database: resourcer_test
 
 production:
   <<: *default
-  database: experience_app_prod
+  database: resourcer_prod

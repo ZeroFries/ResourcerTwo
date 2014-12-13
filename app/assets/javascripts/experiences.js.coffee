@@ -1,5 +1,5 @@
-class @experiencesService
-	@getExperiencesHtml = (filters) ->
+class @sourcesService
+	@getsourcesHtml = (filters) ->
 	# TODO: REDIS CACHE CATEGORIES
-		$.ajax("/experiences/?#{$.param(filters)}").done (data) ->
-			$(document).trigger 'experiences:indexHTML', {html: data}
+		$.ajax("/sources/?#{$.param(filters)}").done (data) ->
+			$(document).trigger 'sources:indexHTML', {html: data}

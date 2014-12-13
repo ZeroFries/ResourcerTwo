@@ -4,7 +4,7 @@ labelHTML = (obj, objType) ->
 	"<input type=\"hidden\" name=\"#{objType}_id\" value=\"#{obj.id}\" class=\"#{objType}_id\">" +
 	"</input></span>"
 
-window.experienceSearch.component = flight.component ->
+window.sourceSearch.component = flight.component ->
 	@attributes({
 		removeLabelSelector: '.remove-label',
 		dropDownItemSelector: '.item'
@@ -14,14 +14,14 @@ window.experienceSearch.component = flight.component ->
 		$('.ui.selection.dropdown').dropdown()
 		@on 'click', {
 			removeLabelSelector: ((e, data) -> @removeLabel(e, data)),
-			dropDownItemSelector: (-> @trigger 'experiences:filter')
+			dropDownItemSelector: (-> @trigger 'sources:filter')
 		}
 		@on document, 'typeahead:autocompleted', @addLabel
 		@on '#keywords', 'keydown blur', (e) ->
 			if (!!e.keyCode && e.keyCode == 13) || !e.keyCode
-				@trigger 'experiences:filter'
+				@trigger 'sources:filter'
 
-		@on 'experiences:filter', @getFilteredExperiences
+		@on 'sources:filter', @getFilteredsources
 
 	@addLabel = (e, data, dataName) ->
 		dataName = data.dataName if dataName == undefined
@@ -32,7 +32,7 @@ window.experienceSearch.component = flight.component ->
 		if !@alreadyBeenAdded(data, nameToSingular[dataName])
 			$labelContainer = $("##{dataName}-label-container")
 			$labelContainer.append(labelHTML(data, nameToSingular[dataName]))
-			@trigger 'experiences:filter'
+			@trigger 'sources:filter'
 
 	@alreadyBeenAdded = (obj, objType) ->
 		labelVals = $.map $(".#{objType}_id"), (input) -> parseInt $(input).val()
@@ -41,9 +41,9 @@ window.experienceSearch.component = flight.component ->
 
 	@removeLabel = (e, data) ->
 		$(e.target).parents('.ui.label')[0].remove()
-		@trigger 'experiences:filter'
+		@trigger 'sources:filter'
 
-	@getFilteredExperiences = ->
+	@getFilteredsources = ->
 		filters = { filters: {
 			keywords: @getKeywords(),
 			emotions: @getTagIds('emotions'),
@@ -51,8 +51,8 @@ window.experienceSearch.component = flight.component ->
 		}}
 		if @getPrice() >= 0
 			filters.filters.price = @getPrice()
-		window.updateURL "/experiences/?#{$.param(filters)}"
-		experiencesService.getExperiencesHtml(filters)
+		window.updateURL "/sources/?#{$.param(filters)}"
+		sourcesService.getsourcesHtml(filters)
 
 	@getKeywords = -> $('#keywords').val().split " "
 	@getPrice = -> parseInt $('#price').dropdown('get value')

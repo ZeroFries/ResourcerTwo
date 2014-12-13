@@ -1,3 +1,3 @@
-json.experience do
-	json.partial! 'experience', experience: @experience
+json.source do
+	json.partial! 'source', source: @source
 end
