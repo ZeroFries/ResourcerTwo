@@ -1,9 +1,21 @@
-<article class="source-container">
-	<%= image_tag(@source.avatar.url, class: "headpiece") %>
+<article class="source-container ui segment">
+	<%= link_to @source.url, target: '_blank' do %>
+		<%= image_tag(@source.avatar.url, class: "pic") %>
+	<% end %>
+
+	<div class="meta-container">
+		<span class="rating-container" title="Rating">
+			<i class="heart outline icon"></i><%= @source.rating %>
+		</span>
+		<span class="r">
+			<i class="icon <%= kind_to_icon @source.kind %>"></i><%= Source::KINDS[@source.kind.to_i] %>
+		</span>
+	</div>
 
 	<div class="content-container">
-
-		<h3 class="title ui header"><%= @source.title %></h3>
+		<%= link_to @source.url, target: '_blank' do %>
+			<h3 class="title ui header"><%= @source.title %></h3>
+		<% end %>
 
 		<div class="meta-container">
 			<div class="tags-container">
@@ -28,25 +40,25 @@
 
 		<div class="description"><%= @source.description %></div>
 
-		<div class="ui comments">
-  			<h3 class="ui dividing header">Comments</h3>
-  			<% @source.comments.each do |comment| %>
-  				<div class="comment">
-				    <div class="content">
-				      <a class="author"><%= comment.user.username %></a>
-				      <div class="metadata">
-				        <span class="date"> - <%= time_ago comment.created_at %></span>
-				      </div>
-				      <div class="text">
-				        <%= comment.user.username %>
-				      </div>
-				      <div class="actions">
-				        <a class="reply">Reply</a>
-				      </div>
-				    </div>
-				  </div>
-  			<% end %>
-  		</div>
-
 	</div>
 </article>
+
+<div class="ui comments">
+	<h3 class="ui dividing header">Comments</h3>
+	<% @source.comments.each do |comment| %>
+		<div class="comment">
+	    <div class="content">
+	      <a class="author"><%= comment.user.username %></a>
+	      <div class="metadata">
+	        <span class="date"> - <%= time_ago comment.created_at %></span>
+	      </div>
+	      <div class="text">
+	        <%= comment.user.username %>
+	      </div>
+	      <div class="actions">
+	        <a class="reply">Reply</a>
+	      </div>
+	    </div>
+	  </div>
+	<% end %>
+</div>

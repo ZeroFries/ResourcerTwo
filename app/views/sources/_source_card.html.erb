@@ -3,12 +3,15 @@
 		<article class="source-card ui segment" style="position: relative;">
 			<div class="image-meta-container">
 				<div class="ui top left attached label inverted rating-container" title="Rating">
-					<i class="heart icon"></i>978<%#= source.rating %>
+					<i class="heart icon"></i><%= source.rating %>
 				</div>
 				<div class="ui top right attached label inverted rating-container" title="<%= Source::KINDS[source.kind.to_i] %>">
 				<i class="icon <%= kind_to_icon source.kind %>"></i>
 				</div>
 				<%= image_tag(source.avatar.url, class: "thumbnail") %>
+			</div>
+
+			<div class="meta-container">
 			</div>
 
 			<div class="content-container">

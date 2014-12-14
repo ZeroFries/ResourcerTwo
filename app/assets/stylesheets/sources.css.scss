@@ -209,3 +209,41 @@
     bottom: 0.4em;
     cursor: pointer;
 }
+
+
+
+.source-container {
+	width: 80%;
+	margin: 2em auto !important;
+	position: relative;
+	height: 20em;
+
+	.pic {
+		width: 30%;
+		height: 15em;
+		margin: 1.5em;
+		margin-top: 1em;
+		position: absolute;
+		left: 1em;
+		top: 1em;
+	}
+
+	.meta-container {
+		position: absolute;
+		bottom: 1em;
+		left: 4em;
+	} 
+
+	.title {
+		margin-top: 1em !important;
+	}
+
+	.content-container {
+		display: inline-block;
+		width: 50%;
+		height: 15em;
+		position: absolute;
+		top: 1em;
+		right: 1em;
+	}
+}
