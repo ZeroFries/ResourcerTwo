@@ -2,6 +2,7 @@
 window.sourceForm ||= {}
 window.sourceList ||= {}
 window.sourceSearch ||= {}
+window.sourceShow ||= {}
 window.typeAhead ||= {}
 
 # Misc Functions

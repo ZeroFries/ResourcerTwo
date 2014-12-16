@@ -13,7 +13,8 @@ class BaseRepository
 		attributes.merge!(user_id: current_user.id) if opts[:belongs_to_user] 
 
 		begin
-			instance_obj = klass.send :new, attributes
+			method = opts[:unique] ? :first_or_initialize : :new
+			instance_obj = klass.where(attributes).send method
 			success = instance_obj.save
 			error = instance_obj.errors.full_messages.join(', ')
 		rescue ActiveRecord::UnknownAttributeError => error

@@ -37,15 +37,22 @@ class BaseRepositoryTest < ActiveSupport::TestCase
  		assert_equal current_user, model.user
   end
 
-  test '#create with bad attribute errors' do
- 		model, success, error = @repo.create name: 'name', fake_attribute: 'fake_attribute'
+  test '#create with unique option' do
+    @repo.opts = {unique: true}
+    original_model = Category.create name: 'name'
+    model, success, error = @repo.create name: 'name'
 
- 		refute success
- 		assert_equal "unknown attribute: fake_attribute", error
+    assert success
+    assert_equal original_model, model
+
+    model, success, error = @repo.create name: 'unique name'
+
+    assert success
+    refute_equal original_model, model
   end
 
   test '#create with validation errors' do
- 		model, success, error = @repo.create
+ 		model, success, error = @repo.create name: nil
 
  		refute success
  		assert_equal "Name can't be blank", error

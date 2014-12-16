@@ -17,26 +17,29 @@
 			<h3 class="title ui header"><%= @source.title %></h3>
 		<% end %>
 
-		<div class="meta-container">
-			<div class="tags-container">
-				<div class="label-group tags ui tiny labels">
-					<% @source.categories.each do |category| %>
-						<%= render "categories/label", category: category %>
-					<% end %>
-				</div>
-
-				<% if @source.user %>
-					<div class="user-tag"> 
-						<%= link_to @source.user.username, users_path(@source.user) %> -
-						<%= time_ago @source.created_at %>
-						<span class="price">
-							<%= price_to_description @source.price %>
-						</span>
-					</div>
+		<div class="tags-container">
+			<div class="label-group tags ui tiny labels">
+				<% @source.categories.each do |category| %>
+					<%= render "categories/label", category: category %>
 				<% end %>
-
 			</div>
 		</div>
+
+		<div class="button-container">
+			<%= vote_button_html @source %>
+		</div>
+
+
+		<% if @source.user %>
+			<div class="user-tag"> 
+				<%= link_to @source.user.username, users_path(@source.user) %> -
+				<%= time_ago @source.created_at %>
+				<span class="price">
+					<%= price_to_description @source.price %>
+				</span>
+			</div>
+		<% end %>
+
 
 		<div class="description"><%= @source.description %></div>
 
@@ -62,3 +65,15 @@
 	  </div>
 	<% end %>
 </div>
+
+<script>
+	window.sourceShow.component.attachTo('.source-container', {sourceId: <%= @source.id %>});
+
+	<% if current_user_completed_source? @source %>
+		$(document).trigger('completedSources:created', {completedSource: <%= raw get_completed_source(@source).to_json %>})
+	<% end %>
+
+	<% if current_user_vote(@source).present? %>
+		$(document).trigger('votes:created', {vote: <%= raw current_user_vote(@source).to_json %>})
+	<% end %>
+</script>

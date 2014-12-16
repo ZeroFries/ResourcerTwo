@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   resources :source_categories
 
+  resources :completed_sources
+
   resources :categories
 
   resources :votes

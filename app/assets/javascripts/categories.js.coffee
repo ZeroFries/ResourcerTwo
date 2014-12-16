@@ -5,6 +5,3 @@ class @categoriesService
 			@categories = data.categories
 			$(document).trigger 'categories:indexFetched', {'categories': @categories}
 			@categories
-
-# $ ->
-# 	window.categoriesService.getCategories()

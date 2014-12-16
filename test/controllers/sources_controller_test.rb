@@ -20,13 +20,14 @@ class SourcesControllerTest < ActionController::TestCase
   end
 
   test '#create error json response' do
+    BaseRepository.any_instance.stubs(:create).returns [nil, false, 'error']
   	source = Source.new title: 'title', description: 'description', price: 0
 
   	post :create, source: source.as_json.merge('bad_attribute' => 1), format: :json
 
 		assert_response 500
   	json = JSON.parse response.body
-  	assert_equal 'unknown attribute: bad_attribute', json['message']
+  	assert_equal 'error', json['message']
   end
 
   test '#show json response' do
