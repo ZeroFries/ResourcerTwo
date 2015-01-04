@@ -27,7 +27,7 @@ module SourcesHelper
 	def vote_button_html(source)
 		atr = {
 			completed_class: compute_completed_class(source),
-			completed_title: compute_completed_title(source),
+			completed_title: 'I have completed this resource',
 			up_vote_class: compute_vote_class(source),
 			up_vote_title: compute_vote_title(source),
 			down_vote_class: compute_vote_class(source, false),
@@ -63,10 +63,6 @@ module SourcesHelper
 
 	def compute_completed_class(source)
 		current_user_completed_source?(@source) ? 'active' : ''
-	end
-
-	def compute_completed_title(source)
-		"I have #{current_user_completed_source?(@source) ? 'not' : ''} completed this source"
 	end
 
 	def compute_vote_class(source, up=true)

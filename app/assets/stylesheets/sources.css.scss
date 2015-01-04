@@ -246,4 +246,14 @@
 		top: 1em;
 		right: 1em;
 	}
+
+	.button-container {
+		width: 10em;
+		#complete { width: 100%; }
+		#up { width: 50%; }
+		#down { 
+			width: 50%; 
+			&.active { background: red !important; }
+		}
+	}
 }
